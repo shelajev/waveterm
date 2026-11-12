@@ -11,9 +11,9 @@ jobs:
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
             - name: Install Task
-              uses: arduino/setup-task@v2
+              uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
               with:
                   version: 3.x
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -30,9 +30,9 @@ jobs:
         needs: [publish-s3]
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
             - name: Install Task
-              uses: arduino/setup-task@v2
+              uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
               with:
                   version: 3.x
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,7 +40,7 @@ jobs:
               run: sudo snap install snapcraft --classic
               shell: bash
             - name: Download Snap from Release
-              uses: robinraju/release-downloader@v1
+              uses: robinraju/release-downloader@28fc21f50d76778e7023361aa1f863e717d3d56f # v1
               with:
                   tag: ${{github.ref_name}}
                   fileName: "*amd64.snap"
@@ -55,9 +55,9 @@ jobs:
         needs: [publish-s3]
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
             - name: Install Task
-              uses: arduino/setup-task@v2
+              uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
               with:
                   version: 3.x
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -65,7 +65,7 @@ jobs:
               run: sudo snap install snapcraft --classic
               shell: bash
             - name: Download Snap from Release
-              uses: robinraju/release-downloader@v1
+              uses: robinraju/release-downloader@28fc21f50d76778e7023361aa1f863e717d3d56f # v1
               with:
                   tag: ${{github.ref_name}}
                   fileName: "*arm64.snap"
@@ -80,14 +80,14 @@ jobs:
         needs: [publish-s3]
         runs-on: windows-latest
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
             - name: Install Task
-              uses: arduino/setup-task@v2
+              uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
               with:
                   version: 3.x
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
             - name: Install winget
-              uses: Cyberboss/install-winget@v1
+              uses: Cyberboss/install-winget@1c6f189175e9f015bf1aa113cd1cc6c73efb9d47 # v1
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: Install wingetcreate

@@ -6,23 +6,6 @@ on:
             - main
         tags:
             - "v[0-9]+.[0-9]+.[0-9]+*"
-    pull_request:
-        # branches:
-        #     - main
-        # paths-ignore:
-        #     - "docs/**"
-        #     - ".storybook/**"
-        #     - ".vscode/**"
-        #     - ".editorconfig"
-        #     - ".gitignore"
-        #     - ".prettierrc"
-        #     - ".eslintrc.js"
-        #     - "**/*.md"
-        types:
-            - opened
-            - synchronize
-            - reopened
-            - ready_for_review
     schedule:
         - cron: 0 21 * * *
     workflow_dispatch: null
@@ -41,17 +24,17 @@ jobs:
         runs-on: windows-latest
         if: github.event.pull_request.draft == false
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
             # General build dependencies
-            - uses: actions/setup-go@v5
+            - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
               with:
                   go-version: ${{env.GO_VERSION}}
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
               with:
                   node-version: ${{env.NODE_VERSION}}
             - name: Install Yarn
-              uses: nick-fields/retry@v3
+              uses: nick-fields/retry@ce71cc2ab81d554ebbe88c79ab5975992d79ba08 # v3
               with:
                   command: |
                       corepack enable
@@ -59,12 +42,12 @@ jobs:
                   timeout_minutes: 5
                   max_attempts: 3
             - name: Install Task
-              uses: arduino/setup-task@v2
+              uses: arduino/setup-task@b91d5d2c96a56797b48ac1e0e89220bf64044611 # v2
               with:
                   version: 3.x
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
             - name: Install Zig
-              uses: mlugg/setup-zig@v1
+              uses: mlugg/setup-zig@53fc45b17fe98b52f92ee5ea08ff48a85a3e7eb7 # v1
 
             - name: Build
               run: task package
@@ -76,7 +59,7 @@ jobs:
             # Upload .exe as an artifact
             - name: Upload .exe artifact
               id: upload
-              uses: actions/upload-artifact@v4
+              uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
               with:
                   name: windows-exe
                   path: make/*.exe
